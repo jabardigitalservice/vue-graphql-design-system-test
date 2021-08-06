@@ -1,7 +1,6 @@
 <template>
   <div class="sm:grid sm:grid-cols-1 sm:gap-4 sm:items-center sm:pt-5">
     <div class="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
-        <div>{{ login }}</div>
         <div class="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10">
         <div class="pb-4">
             <jds-input-text
@@ -31,7 +30,7 @@
 
 <script>
   import { GRAPHQL_USER_ID, GRAPHQL_AUTH_TOKEN } from '../graphql/settings'
-  import { SIGNIN_USER_MUTATION, TEST } from '../graphql/graphql'
+  import { SIGNIN_USER_MUTATION } from '../graphql/graphql'
 
   export default {
     name: 'AppLogin',
@@ -42,52 +41,19 @@
         password: ''
       }
     },
-    apollo: {
-      login: {
-        query: TEST
-      },
-      // login: {
-      //   // gql query
-      //   query: SIGNIN_USER_MUTATION,
-      //   // Static parameters
-      //   variables: {
-      //     email: "admin@example.com",
-      //     password: "admin"
-      //   },
-      // },
-    },
     methods: {
       confirm () {
-        // const { email, password } = this.$data
+        const { email, password } = this.$data
         if (this.login) {
-            console.log(SIGNIN_USER_MUTATION)
-            const b = this.$apollo.addSmartQuery('login', {
-                query: TEST,
-                // variables: {
-                //     email,
-                //     password
-                // }
+            this.$apollo.mutate('login', {
+                query: SIGNIN_USER_MUTATION,
+                variables: {
+                    email,
+                    password
+                }
+            }).then((result) => {
+                console.log(result)
             })
-            console.log(b)
-            // console.log(this.$apollo.queries.login)
-            // this.$apollo.queries.login({
-            //     query: SIGNIN_USER_MUTATION,
-            //     variables: {
-            //         email,
-            //         password
-            //     }
-            // }).then((result) => {
-            //     console.log(result)
-            // })
-            // this.$apollo.mutate({
-            //     query: SIGNIN_USER_MUTATION,
-            //     variables: {
-            //         email,
-            //         password
-            //     }
-            // }).then((result) => {
-            //     console.log(result)
-            // })
         }
         this.$router.push({path: '/'})
       },

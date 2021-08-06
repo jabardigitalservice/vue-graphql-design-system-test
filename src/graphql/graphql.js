@@ -7,9 +7,10 @@ export const SIGNIN_USER_MUTATION = gql`
     }
 }`
 
-export const TEST = gql`
-{
-  login(email:"admin@example.com", password: "admin") {
-    token
+export const CREATE_USER = gql`
+mutation {
+  createUser(userInput: {email: $email, password: $password, name: $name}) {
+    _id,
+    name
   }
 }`
