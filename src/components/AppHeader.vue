@@ -1,16 +1,13 @@
 <template>
   <div>
     <div>
-      <div class="fw7 mr1">Test Graphql</div>
-      <router-link to="/">new</router-link>
-      <div v-if="userId">
-        <div>|</div>
-        <router-link to="/create">submit</router-link>
-      </div>
+      <div class="mb-2">Test Graphql</div>
+      {{ userId }}
+      <router-link v-if="userId !== null" to="/">new</router-link>
+      <router-link v-else to="/login">login</router-link>
     </div>
     <div>
       <div v-if="userId" @click="logout()">logout</div>
-      <router-link v-else to="/login">login</router-link>
     </div>
   </div>
 </template>
@@ -24,9 +21,6 @@
       userId () {
         return this.$root.$data.userId
       }
-    },
-    created() {
-        console.log(this.userId )
     },
     methods: {
       logout () {

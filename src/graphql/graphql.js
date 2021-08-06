@@ -6,3 +6,10 @@ export const SIGNIN_USER_MUTATION = gql`
       token
     }
 }`
+
+export const TEST = gql`
+{
+  login(email:"admin@example.com", password: "admin") {
+    token
+  }
+}`
