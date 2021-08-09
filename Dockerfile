@@ -7,9 +7,6 @@ WORKDIR /app
 
 # Environment app
 ARG VUE_APP_GRAPHQL_URI=$VUE_APP_GRAPHQL_URI
-# ENV VUE_APP_GRAPHQL_URI $VUE_APP_GRAPHQL_URI
-
-RUN echo $VUE_APP_GRAPHQL_URI
 
 # Copy all files to app folder
 COPY package*.json ./
