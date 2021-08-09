@@ -25,9 +25,6 @@ jobs:
       - name: Build and push
         id: docker_build
         uses: docker/build-push-action@v2
-        env:
-          VUE_APP_GRAPHQL_URI: ${{ secrets.VUE_APP_GRAPHQL_URI }}
-        run: echo "${VUE_APP_GRAPHQL_URI}"
         with:
           push: true
           VUE_APP_GRAPHQL_URI: ${{ secrets.VUE_APP_GRAPHQL_URI }}
