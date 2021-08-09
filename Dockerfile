@@ -4,16 +4,17 @@ FROM mhart/alpine-node:14 as build-stage
 # Create app folder
 RUN mkdir /app
 WORKDIR /app
+COPY .env .
+
+# Environment app
+ENV VUE_APP_GRAPHQL_URI=$VUE_APP_GRAPHQL_URI
+
+RUN echo $VUE_APP_GRAPHQL_URI
 
 # Copy all files to app folder
 COPY package*.json ./
 RUN npm install --progress=false
 COPY . /app
-
-# Environment app
-ENV VUE_APP_GRAPHQL_URI $VUE_APP_GRAPHQL_URI
-
-RUN echo $VUE_APP_GRAPHQL_URI
 
 RUN npm run build
 
