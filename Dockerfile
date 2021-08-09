@@ -6,7 +6,7 @@ RUN mkdir /app
 WORKDIR /app
 
 # Environment app
-ARG VUE_APP_GRAPHQL_URI=$VUE_APP_GRAPHQL_URI
+# ARG VUE_APP_GRAPHQL_URI=$VUE_APP_GRAPHQL_URI
 # ENV VUE_APP_GRAPHQL_URI $VUE_APP_GRAPHQL_URI
 
 RUN echo $VUE_APP_GRAPHQL_URI
@@ -20,9 +20,6 @@ RUN npm run build
 
 # production stage
 FROM nginx:stable-alpine as production-stage
-
-# Environment app
-ENV VUE_APP_GRAPHQL_URI $VUE_APP_GRAPHQL_URI
 
 COPY --from=build-stage /app/dist /usr/share/nginx/html
 EXPOSE 80
