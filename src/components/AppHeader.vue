@@ -1,32 +1,30 @@
 <template>
   <div>
     <div>
-      <div class="mb-2">Test Graphql</div>
-      {{ userId }}
-      <router-link v-if="userId !== null" to="/">new</router-link>
+      <router-link v-if="authStatus" to="/register">register</router-link>
       <router-link v-else to="/login">login</router-link>
     </div>
     <div>
-      <div v-if="userId" @click="logout()">logout</div>
+      <div v-if="authStatus" @click="logoutUser()">logout</div>
     </div>
   </div>
 </template>
 
 <script>
-  import { GRAPHQL_USER_ID, GRAPHQL_AUTH_TOKEN } from '../graphql/settings'
+  import { mapActions } from 'vuex'
+  import { mapGetters } from 'vuex'
 
   export default {
     name: 'AppHeader',
     computed: {
-      userId () {
-        return this.$root.$data.userId
-      }
+      ...mapGetters(['user']),
+      ...mapGetters(['authStatus']),
+      ...mapGetters(['isAuthenticated'])
     },
     methods: {
-      logout () {
-        localStorage.removeItem(GRAPHQL_USER_ID)
-        localStorage.removeItem(GRAPHQL_AUTH_TOKEN)
-        this.$root.$data.userId = localStorage.getItem(GRAPHQL_USER_ID)
+      ...mapActions(['logout']),
+      logoutUser () {
+        this.logout().then(() => this.$router.push('/login'))
       }
     }
   }

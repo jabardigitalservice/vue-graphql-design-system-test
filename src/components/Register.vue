@@ -4,23 +4,30 @@
         <div class="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10">
         <div class="pb-4">
             <jds-input-text
-                v-model="auth.email"
+                v-model="user.name"
+                type="text"
+                placeholder="Username"
+            />
+        </div>
+        <div class="pb-4">
+            <jds-input-text
+                v-model="user.email"
                 type="text"
                 placeholder="Your email address"
             />
         </div>
         <div class="pb-4">
             <jds-input-text
-                v-model="auth.password"
+                v-model="user.password"
                 type="password"
                 placeholder="Password"
             />
         </div>
-        <div class="justify-center">
+        <div class="w-full">
             <jds-button
-                label="Login"
+                label="Create User"
                 variant="primary"
-                @click="loginUser"
+                @click="createUser"
             />
         </div>
         </div>
@@ -32,19 +39,20 @@
   import { mapActions } from 'vuex'
 
   export default {
-    name: 'AppLogin',
+    name: 'Register',
     data () {
       return {
-        auth: {
+        user: {
+          name: '',
           email: '',
           password: ''
         }
       }
     },
     methods: {
-      ...mapActions(['login']),
-      loginUser() {
-        this.login(this.auth).then(() => this.$router.push('/'))
+      ...mapActions(['register']),
+      createUser() {
+        this.register(this.user).then(() => alert('success'))
       }
     }
   }

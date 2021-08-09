@@ -5,23 +5,21 @@ import { DesignSystem } from '@jabardigitalservice/jds-design-system'
 import App from './App.vue'
 import router from './router'
 
-import './tailwind.css'
-import { GRAPHQL_USER_ID } from './graphql/settings'
+import './style/tailwind.css'
 import { createProvider } from './plugins/vue-apollo'
+
+import store from './store'
 
 Vue.config.productionTip = false
 
 Vue.use(DesignSystem)
 
-let userId = localStorage.getItem(GRAPHQL_USER_ID)
 
 /* eslint-disable no-new */
 new Vue({
   el: '#app',
   apolloProvider: createProvider(),
   router,
-  data: {
-    userId
-  },
+  store,
   render: h => h(App)
 })
