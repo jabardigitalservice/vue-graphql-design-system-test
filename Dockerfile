@@ -4,7 +4,6 @@ FROM mhart/alpine-node:14 as build-stage
 # Create app folder
 RUN mkdir /app
 WORKDIR /app
-COPY .env .
 
 # Environment app
 ENV VUE_APP_GRAPHQL_URI=$VUE_APP_GRAPHQL_URI
