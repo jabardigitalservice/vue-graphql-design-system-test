@@ -30,6 +30,7 @@ jobs:
         uses: docker/build-push-action@v2
         with:
           push: true
+          VUE_APP_GRAPHQL_URI: ${{ env.VUE_APP_GRAPHQL_URI }}
           tags: ${{ secrets.IMAGE_NAME }}:${{ secrets.IMAGE_TAG }}
 
       - name: Deploy Caprover
