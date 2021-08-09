@@ -6,7 +6,8 @@ RUN mkdir /app
 WORKDIR /app
 
 # Environment app
-ENV VUE_APP_GRAPHQL_URI=$VUE_APP_GRAPHQL_URI
+ARG VUE_APP_GRAPHQL_URI=https://graphql-blog.rover.digitalservice.id/graphql
+ENV VUE_APP_GRAPHQL_URI $VUE_APP_GRAPHQL_URI
 
 RUN echo $VUE_APP_GRAPHQL_URI
 
