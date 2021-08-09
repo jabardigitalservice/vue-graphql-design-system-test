@@ -9,10 +9,12 @@ WORKDIR /app
 COPY package*.json ./
 RUN npm install --progress=false
 COPY . /app
-# Environment app
-ARG VUE_APP_GRAPHQL_URI
 
+# Environment app
 ENV VUE_APP_GRAPHQL_URI $VUE_APP_GRAPHQL_URI
+
+RUN echo ${VUE_APP_GRAPHQL_URI}
+
 RUN npm run build
 
 # production stage
