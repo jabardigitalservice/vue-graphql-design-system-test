@@ -52,7 +52,11 @@
     methods: {
       ...mapActions(['register']),
       createUser() {
-        this.register(this.user).then(() => alert('success'))
+        this.register(this.user)
+          .then((resp) => {
+            if (resp.networkError) return alert('gagal')
+            return alert('success')
+          })
       }
     }
   }

@@ -1,7 +1,7 @@
 <template>
-  <div id="app" class="w-full flex flex-col justify-center">
+  <div id="app">
     <app-header></app-header>
-    <div class='bg-gray-50'>
+    <div class='w-full flex flex-col justify-center'>
       <router-view></router-view>
     </div>
   </div>
@@ -25,6 +25,5 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  margin-top: 60px;
 }
 </style>

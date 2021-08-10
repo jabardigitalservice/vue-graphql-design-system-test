@@ -34,11 +34,12 @@ export default new Vuex.Store({
   actions: {
     async register ({ dispatch }, body) {
       try {
-        const { data } = await apolloClient.mutate({ mutation: CREATE_USER, variables: { ...body } })
+        const { error, data } = await apolloClient.mutate({ mutation: CREATE_USER, variables: { ...body } })
+        console.log(error)
         dispatch('setUser')
         return data
-      } catch (e) {
-        console.log(e)
+      } catch (error) {
+        return error
       }
     },
     async login ({ dispatch }, auth) {
@@ -47,8 +48,8 @@ export default new Vuex.Store({
         const token = data?.login?.token || null
         dispatch('setToken', token)
         dispatch('setUser')
-      } catch (e) {
-        console.log(e)
+      } catch (error) {
+        return error
       }
     },
     async setUser ({ commit }) {
