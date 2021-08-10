@@ -34,8 +34,7 @@ export default new Vuex.Store({
   actions: {
     async register ({ dispatch }, body) {
       try {
-        const { error, data } = await apolloClient.mutate({ mutation: CREATE_USER, variables: { ...body } })
-        console.log(error)
+        const { data } = await apolloClient.mutate({ mutation: CREATE_USER, variables: { ...body } })
         dispatch('setUser')
         return data
       } catch (error) {
