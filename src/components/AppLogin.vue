@@ -30,7 +30,6 @@
 
 <script>
   import { mapActions } from 'vuex'
-
   export default {
     name: 'AppLogin',
     data () {
@@ -43,7 +42,7 @@
     },
     methods: {
       ...mapActions(['login']),
-      loginUser() {
+      async loginUser() {
         this.login(this.auth).then(() => this.$router.push('/'))
       }
     }

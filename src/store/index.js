@@ -43,10 +43,12 @@ export default new Vuex.Store({
     },
     async login ({ dispatch }, auth) {
       try {
-        const { data } = await apolloClient.query({ query: SIGNIN_USER, variables: { ...auth } })
-        const token = data?.login?.token || null
-        dispatch('setToken', token)
-        dispatch('setUser')
+        const { loading, data } = await apolloClient.query({ query: SIGNIN_USER, variables: { ...auth } })
+        if (!loading) {
+          const token = data?.login?.token || null
+          dispatch('setToken', token)
+          dispatch('setUser')
+        }
       } catch (error) {
         return error
       }
